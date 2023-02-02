@@ -128,7 +128,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="help.c" />
+    <ClCompile Include="inputFile.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="outputFile.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="header.h" />
