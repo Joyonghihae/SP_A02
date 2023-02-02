@@ -132,6 +132,7 @@
     <ClCompile Include="inputFile.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="outputFile.c" />
+    <ClCompile Include="valid.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="header.h" />

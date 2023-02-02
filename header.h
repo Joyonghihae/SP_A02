@@ -5,5 +5,12 @@
 
 
 
-int checkTwoCommand(char* argv);
+
 int checkFilename(char* str);
+int checkInputArgument(char* str);
+
+int checkTwoCommand(char* argv);
+int checkOutputArgument(char* argv);
+
+
+void help();
