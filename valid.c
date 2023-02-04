@@ -10,17 +10,19 @@ int checkFilename(char* str) {
     // check: 파일이 아니면? 혹은 -ifilename.dat이 아니면?? 체크해야됨
     // 1. .이 없으면 -> strstr
     // 2. -i가 없으면 -> strstr
-    //아 하기싫어.. 유진님 뭐하시나.. 이거좀해줘요
+
 
     int value = 0;
-    char* name;
+    char* name = NULL;
     char extension[20] = { 0 };
     char checkcmd[20] = { 0 };
-    char point[2] = ".";
+    char* fileName = NULL;
 
-    char* ptr = strstr(str, point);
 
-    if (ptr == NULL) {
+    name = strstr(str, ".");
+
+    if (name == NULL)
+    {
 
         printf("ERROR: Not specified\n");
 
@@ -28,67 +30,61 @@ int checkFilename(char* str) {
 
         return value;
     }
-    else {
+    else 
+    {
 
-        // cut based on ".". "-i"
-        name = strtok(str, point);
+        if (strstr(name, "-i") != NULL)
+        {
+            name = strtok_s(name, "i", &fileName);
+        }
+        else if (strstr(name, "-o" != NULL))
+        {
+        }
 
-        while (name != NULL) {
-
-            strcpy(extension, name);
-            name = strtok(NULL, " ");
+        
+     
+            // output은 확장자가달라도 상관없기에 수정해야함
+          // 수정해야함  str = strtok_s(NULL, " ", &fileName);
             
             // *********** error *****************
             // 만약 -iddd.dat이 아니라 -idafd.asm이면?
             // 반대로 -oaa.asm이 아니라 -oddd.dat이면?
-            // 아 귀찮네 
+  
+            //if (strcmp(extension, "dat") == 0) {
 
-            if (strcmp(extension, "dat") == 0) {
+            //    printf("Success!! dat \n");
 
-                printf("Success!! dat \n");
+            //    value = 1;
 
-                value = 1;
+            //    return value;
+            //}
+            //else if (strcmp(extension, "asm") == 0) {
 
-                return value;
-            }
-            else if (strcmp(extension, "asm") == 0) {
+            //    printf("Success!! asm \n");
 
-                printf("Success!! asm \n");
+            //    value = 1;
 
-                value = 1;
+            //    return value;
 
-                return value;
-
-            }
+            //}
         }
     }
 
 
-    if (value == 0) {
-
-        value = -1;
-
-        return value;
-    }
-
-
-    return value;
-}
+    //
 
 int checkInputArgument(char* str) {
 
-    int value = 0;
+    int value = -1;
     char* cmd;
     char checkcmd[20] = { 0 };
-    char arg[3] = "-i";
 
-    char* ptr1 = strstr(str, arg);
+
+    char* ptr1 = strstr(str, "-i");
 
     if (ptr1 == NULL) {
 
         printf("ERROR: Not specified\n");
-
-        value = -1;
 
         return value;
     }
@@ -112,12 +108,6 @@ int checkInputArgument(char* str) {
 
     }
 
-    if (value == 0) {
-
-        value = -1;
-
-        return value;
-    }
 
     return value;
 }
@@ -126,22 +116,16 @@ int checkInputArgument(char* str) {
 
 int checkTwoCommand(char* argv) {
 
-    int value = 0;
+    int value = -1;
     char extension[3] = { 0 };
 
-    char arg[] = "-h";
-    char str1[20];
-    char str2[20];
+
+    char input[20];
 
 
 
-    // -h
-    // -o, asm 확인
+    if (strcmp(argv, "-h") == 0) {
 
-
-    if (strcmp(argv, arg) == 0) {
-
-        printf("Success!! -h \n");
 
         value = 1;
 
@@ -149,13 +133,13 @@ int checkTwoCommand(char* argv) {
     }
     else {
 
-        strcpy(str1, argv);
-        strcpy(str2, argv);
+        strcpy(input, argv);
+  
 
-        int dd = checkOutputArgument(str1);
-        int aa = checkFilename(str2);
+        int output = checkOutputArgument(input);
+        int fileName = checkFilename(input);
 
-        if ((dd == 1) && (aa == 1)) {
+        if ((output == 1) && (fileName == 1)) {
 
             printf("Success!! Two Command Argument, -omyData.asm \n ");
 
@@ -167,25 +151,17 @@ int checkTwoCommand(char* argv) {
 
             printf("ERROR: Something wrong to twoCmd\n");
 
-            value = -1;
-
             return value;
         }
     }
 
-    if (value == 0) {
-
-        value = -1;
-
-        return value;
-    }
 
 
     return value;
 }
 
 int checkOutputArgument(char* str) {
-    int value = 0;
+    int value = -1;
     char* cmd;
     char checkcmd[20] = { 0 };
     char arg[3] = "-o";
@@ -195,8 +171,6 @@ int checkOutputArgument(char* str) {
     if (ptr1 == NULL) {
 
         printf("ERROR: Not specified\n");
-
-        value = -1;
 
         return value;
     }
@@ -212,20 +186,12 @@ int checkOutputArgument(char* str) {
 
                 printf("Success!! -o \n");
                 value = 1;
-
-                return value;
             }
 
         }
 
     }
 
-    if (value == 0) {
-
-        value = -1;
-
-        return value;
-    }
 
     return value;
 }

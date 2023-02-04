@@ -9,109 +9,104 @@
 
 int main(int argc, char* argv[])
 {
-    int oneCmd = 1;
-    int twoCmd = 2;
-    int threeCmd = 3;
-    int fourCmd = 4;
     char str[20];
-    char str1[20];
-    char str2[20];
+    char input[20];
     int checkArg = 0;
     int number = 0;
 
-    //if (strcmp(argv[0], "encodeInput") == 0) {
 
+    if (argc == 1) {
 
-    argc = 2;
-    argv[0] = "encodeInput";
-    argv[1] = "-h";
-
-
-        if (argc == oneCmd) {
-
-            //standard input
+        //standard input
+        //strtok으로 나누기
+        //배열 인덱스 개수
+        //해당 argument에 넣기
             
-            printf("File name: ");
+        printf("File name: ");
 
 
-            scanf("%s", str);
-            printf("\n");
-            strcpy(str1, str);
-            strcpy(str2, str);
-            checkArg = checkInputArgument(str1);
-            number = checkFilename(str2);
-            if ((number == 1) && (checkArg == 1) ) {
+        scanf("%s", str);
+        printf("\n");
+        strcpy(input, str);
+   
+        checkArg = checkInputArgument(input);
+        number = checkFilename(input);
+        if ((number == 1) && (checkArg == 1) ) {
 
-                // encodeInput 만 입력했을때 넘어가는 함수
+            // encodeInput 만 입력했을때 넘어가는 함수
 
-                printf("Here is argument only 1. Success!!\n");
-            }
-            else {
-
-                printf("ERROR: Something wrong to oneCmd\n");
-
-                return 0;
-            }
-
-        }
-        else if (argc == twoCmd) {
-
-
-            int argnumber = checkTwoCommand(argv[1]);
-
-
-            if (argnumber == 1) {
-
-                printf("Here is argument -h. Success!!\n");
-
-                help();
-
-                //encodeInput -h 이거 입력했을때 넘어가는 함수 
-
-                return 0;
-            }
-            else if (argnumber == 2) {
-
-                checkArg = 0;
-                number = 0;
-                //standard input
-                printf("File name: ");
-                scanf("%s", str);
-                printf("\n");
-                strcpy(str1, str);
-                strcpy(str2, str);
-                checkArg = checkInputArgument(str1);
-                number = checkFilename(str2);
-                printf("Here is argument only 2. Success!!\n");
-                // encodeInput -omyData.asm 이거만 입력했을때 넘어가는 함수
-
-
-            }
-            else {
-                printf("ERROR : Something wrong..!!!\n");
-
-                return -1;
-            }
-
-            return 0;
-        }
-        else if (argc == threeCmd) {
-
-            //encodeInput –srec -imyData.dat 이거 입력했을때 
-            printf("Here is argument only 3. Success!!\n");
-
-            return 0;
-        }
-        else if (argc == fourCmd) {
-
-            //encodeInput -imyData.dat -omyData.srec -srec 이거 입력했을때
-            printf("Here is argument only 4. Success!!\n");
-
-            return 0;
+            printf("Here is argument only 1. Success!!\n");
         }
         else {
-            printf("ERROR: argc wrong, check the command \n");
+
+            printf("ERROR: Something wrong to oneCmd\n");
+
+            return 0;
         }
+
+    }
+    else if (argc == 2) {
+
+
+        int argnumber = checkTwoCommand(argv[1]);
+
+
+        if (argnumber == 1)     // input : -h
+        {
+
+            help();
+
+            return 0;
+        }
+        else if (argnumber == 2) 
+        {
+
+            checkArg = 0;
+            number = 0;
+
+            //standard input
+            printf("File name: ");
+            scanf("%s", str);
+            printf("\n");
+            strcpy(input, str);
+            checkArg = checkInputArgument(input);
+            number = checkFilename(input);
+
+
+            printf("Here is argument only 2. Success!!\n");
+            // encodeInput -omyData.asm 이거만 입력했을때 넘어가는 함수
+
+
+        }
+        else 
+        {
+            printf("ERROR : Something wrong..!!!\n");
+
+            return -1;
+        }
+
+        return 0;
+    }
+    else if (argc == 3) {
+
+        //encodeInput –srec -imyData.dat 이거 입력했을때 
+        checkArg = 0;
+
+
+        checkArg = checkInputArgument(input);
+
+        return 0;
+    }
+    else if (argc == 4) {
+
+        //encodeInput -imyData.dat -omyData.srec -srec 이거 입력했을때
+        printf("Here is argument only 4. Success!!\n");
+
+        return 0;
+    }
+    else {
+        printf("ERROR: argc wrong, check the command \n");
+    }
 
         // ls -l | encodeInput -odirectory.srec -srec 이건 몇개라고해야될까.. 
 
