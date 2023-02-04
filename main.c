@@ -4,7 +4,11 @@
 #pragma warning(disable: 4996)
 
 
-// runtime swich란?? 
+//get file name except runtime switch
+
+// if valid, go to inputFile function
+
+// -srec = s-record otherwise assembly 
 
 
 int main(int argc, char* argv[])
@@ -12,7 +16,11 @@ int main(int argc, char* argv[])
     char str[20];
     char input[20];
     int checkArg = 0;
+    int checkSrec = 0;
     int number = 0;
+    char inputStr[] = {0};
+
+    int i = 0;
 
 
     if (argc == 1) {
@@ -91,16 +99,64 @@ int main(int argc, char* argv[])
 
         //encodeInput –srec -imyData.dat 이거 입력했을때 
         checkArg = 0;
+        
 
 
-        checkArg = checkInputArgument(input);
+
+        //에엥 argv를 배열에 넣어야 하는데 안되여 왜지
+        //valid쪽에 아래거 함수 만들어놧눈데 안되서 여기서 테스트해보는데
+        // 왜 이게 안될까여
+        // 
+        // inputStr = argumentArray(argv[], argc);
+        //
+        //for (int i = 0; i < argc; i++)
+        //{
+        //    inputStr[i] = argv[i+1];
+        //}
+       
+          //loop check if they have -srec and -i 
+
+     
+        
+        checkArg = checkInputArgument(inputStr);
+        checkSrec = checkSrecArgument(inputStr);
+
+        if (checkArg == 1 && checkSrec == 1)
+        {
+            //go to s-record output function
+
+        }
+        else
+        {
+            printf("ERROR: Invalid arguments!");
+        }
 
         return 0;
     }
     else if (argc == 4) {
 
         //encodeInput -imyData.dat -omyData.srec -srec 이거 입력했을때
-        printf("Here is argument only 4. Success!!\n");
+       
+        checkArg = 0;
+        // put argv elemnts into array
+        for (i = 0; i < argc; i++)
+        {
+            input[i] = argv[i + 1];
+        }
+
+
+        checkArg = checkInputArgument(input);
+        checkSrec = checkSrecArgument(input);
+
+        if (checkArg == 1 && checkSrec == 1)
+        {
+            //go to s-record output function
+
+        }
+        else
+        {
+            printf("ERROR: Invalid arguments!");
+        }
 
         return 0;
     }
@@ -118,4 +174,5 @@ int main(int argc, char* argv[])
 
     return 0;
 }
+
 

@@ -16,7 +16,7 @@ int checkFilename(char* str) {
     char* name = NULL;
     char extension[20] = { 0 };
     char checkcmd[20] = { 0 };
-    char* fileName = NULL;
+
 
 
     name = strstr(str, ".");
@@ -32,19 +32,10 @@ int checkFilename(char* str) {
     }
     else 
     {
+        return 1;
+    
 
-        if (strstr(name, "-i") != NULL)
-        {
-            name = strtok_s(name, "i", &fileName);
-        }
-        else if (strstr(name, "-o" != NULL))
-        {
-        }
-
-        
-     
-            // output은 확장자가달라도 상관없기에 수정해야함
-          // 수정해야함  str = strtok_s(NULL, " ", &fileName);
+            // 이 함수에서는 확장자 여부만 확인
             
             // *********** error *****************
             // 만약 -iddd.dat이 아니라 -idafd.asm이면?
@@ -67,8 +58,8 @@ int checkFilename(char* str) {
             //    return value;
 
             //}
-        }
     }
+}
 
 
     //
@@ -196,5 +187,33 @@ int checkOutputArgument(char* str) {
     return value;
 }
 
+
+int checkSrecArgument(char* str)
+{
+    int value = - 1;
+
+    if (strcmp(str, "-srec") == 0)
+    {
+        value = 1;
+    }
+
+
+    return value;
+}
+
+
+//put argv elements to array and return array pointer
+const char* argumentArray(char str[], int argc)
+{
+    
+    char arr[10] = { 0 };
+    for (int i = 0; i < argc; i++)
+    {
+        arr[i] = str[i + 1];
+    }
+
+    return arr;
+
+}
 
 // ----------------------------------------------------------------main------------------------------------------------------
