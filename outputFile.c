@@ -24,7 +24,6 @@ int outputRecord(char* argv) {
 	char str[17] = { 0 };
 
 	fp = fopen(argv, "r");
-
 	if (fp == NULL) {
 
 		printf("There is no file");
@@ -38,14 +37,56 @@ int outputRecord(char* argv) {
 
 	int i = 0;
 
+	///////////////////
+
+	char* s0 = "S0";
+	char* nameStr = "YUJIN-EUNYOUNG";
+	char storeArr[20] = { 0 };
+	char sRecordName[20] = { 0 };
+
+	int ascii = 0;
+
+	int index = strlen(nameStr);
+
+	sprintf(storeArr, "%2X", index);
+	strcat(sRecordName, storeArr);
+	
+	while (i < index)
+	{
+		ascii = nameStr[i];
+
+		sprintf(storeArr, "%X", ascii);
+		strcat(sRecordName, storeArr);
+
+		i++;
+	}
+
+	
+
+
+
+	/////////////////////////
+
+
+	
+
 	while (fgets(str, sizeof(str), fp)) {
 
-
+		
 		createSREC = readRecordData(str, createSREC);
 
-		
+		//!!!!!
+		//sRecordType(createSREC);
+		i++;
 
 	}
+	
+
+	
+
+
+
+
 
 	// close the file 
 	if (fclose(fp) != 0)
@@ -76,7 +117,7 @@ char* readRecordData(char* str, char* createSREC) {
 		// read one character and calculate
 		ascii = readText[i];
 
-		sprintf(storeArray, "$%X,", ascii);
+		sprintf(storeArray, "%X", ascii);
 
 
 		createSREC = strcat(assembly, storeArray);
@@ -90,3 +131,9 @@ char* readRecordData(char* str, char* createSREC) {
 
 
 }
+
+//char* sRecordType(char* str)
+//{
+//	//s1 
+//}
+
