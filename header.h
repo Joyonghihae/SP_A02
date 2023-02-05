@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #pragma warning(disable: 4996)
 
-
+int checkSrec(char* str);
 int checkFileValidation(char* str);
 
 
