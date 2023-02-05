@@ -1,15 +1,12 @@
 ﻿#include <stdio.h>
 #include <string.h>
 #include "header.h"
-
 #pragma warning(disable: 4996)
 
 
 int inputAssembly(char* argv) {
 
-
 	// -iddd.dat 이렇게 입력
-
 	// 1. -i제거하기 
 	char* cmdI = "-i";
 	char* ptr = strstr(argv, cmdI);
@@ -18,7 +15,6 @@ int inputAssembly(char* argv) {
 		removeSwitch(argv, 'i', '-');
 
 	}
-
 
 	//1.  dc.b는 한줄씩 계속 반복해서 붙이기
 	//2. 이거.. 16진수인가 뭐야이거 음 $해서..음음음 아놔 
@@ -30,7 +26,7 @@ int inputAssembly(char* argv) {
 
 	bool loop = true;
 	FILE* fp;
-	char arrayHex[] = {0};
+	char arrayHex[] = { 0 };
 	char fileName[20];
 	strcpy(fileName, argv);
 	char* createAssembly = 0;
@@ -47,6 +43,7 @@ int inputAssembly(char* argv) {
 
 	char dcByte[100] = { 0 };
 	char enter[2] = { 0 };
+	char* enter1 = "\n";
 
 	int i = 0;
 
@@ -61,26 +58,16 @@ int inputAssembly(char* argv) {
 		// 마지막 ,랑 $0제거하기 
 		// 
 
-
 		strcpy(dcByte, "dc.b\t");
 		strcpy(enter, "\n");
-		
+
 		strcat(dcByte, createAssembly);
-
-		/*while (dcByte[i]) {
-
-			i++;
-		}
-		
-		dcByte[i - 1] = "\0";*/
 
 		strcat(dcByte, enter);
 
 		createFile(dcByte, fileName);
 
 	}
-
-	
 
 	// close the file 
 	if (fclose(fp) != 0)
@@ -89,9 +76,6 @@ int inputAssembly(char* argv) {
 		printf("Can't close the TEXT file that we were writing to.\n");
 		return -3;
 	}
-
-	// 3. asm파일로 바꾸기
-
 
 	return 0;
 }
@@ -105,28 +89,39 @@ char* readString(char* text, char* createAssembly) {
 	char storeArray[100] = { 0 };
 	char assembly[100] = { 0 };
 
-	int num1 = 16;
-	int num2 = 32;
-	int num3 = 144;
 	// copy the string into readText
 	strcpy(readText, text);
+	int i = 0;
+	int j = 0;
+	for (i = 0; i < readText[i]; i++) {
 
-	for (int i = 0; i < sizeof(readText); i++) {
+		//\0까지 읽네..?
+		// read one character and calculate
+		ascii = readText[i];
 
-			//\0까지 읽네..?
-		
-			// read one character and calculate
-			ascii = readText[i];
+		sprintf(storeArray, "$%X,", ascii);
 
 
-			// Change it to hexadecimal
-			sprintf(storeArray, "$%X,", ascii);
+		createAssembly = strcat(assembly, storeArray);
 
-			createAssembly = strcat(assembly, storeArray);
-		
 		ascii = 0;
 
 	}
+
+	//char* end = 0;
+
+	/*for (j = 0; j < sizeof(assembly); j++) {
+
+		if (strcmp(assembly, " ") == 0) {
+
+			assembly[i - 1] = "\0";
+
+		}
+
+	}
+*/
+
+	
 
 	return createAssembly;
 }

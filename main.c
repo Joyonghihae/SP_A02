@@ -3,10 +3,6 @@
 #include "header.h"
 #pragma warning(disable: 4996)
 
-
-// runtime swich란?? 
-
-
 int main(int argc, char* argv[])
 {
     int oneCmd = 1;
@@ -15,11 +11,13 @@ int main(int argc, char* argv[])
     int fourCmd = 4;
     char str[20];
     char input[20];
-   // char str2[20];
+    // char str2[20];
     int checkArg = 0;
     int number = 0;
     int srec = 0;
     int output = 0;
+    int c = 0;
+    int i = 0;
 
     //if (strcmp(argv[0], "encodeInput") == 0) {
 
@@ -30,24 +28,43 @@ int main(int argc, char* argv[])
 
 
 
+
+
+
+
     if (argc == oneCmd) {
 
         //standard input
-            
-            printf("File name: ");
 
 
-            scanf("%s", str);
-            printf("\n");
-            strcpy(str1, str);
-            strcpy(str2, str);
-            checkArg = checkFileValidation(str1);
-            //number = checkFilename(str2);
-            if (checkArg == 4) {
+        while (1)
+        {
 
-                // encodeInput 만 입력했을때 넘어가는 함수
-                //standard input into Assembly 
-                inputAssembly(str);
+            c = getchar();
+            if (c == 26 || c == -1)
+            {
+                break;
+            }
+            input[i] = c;
+            i++;
+
+            if (c == 10)
+            {
+                strcpy(input, "");
+                i = 0;
+            }
+        }
+
+
+
+
+        checkArg = checkFileValidation(input);
+        //number = checkFilename(str2);
+        if (checkArg == 4) {
+
+            // encodeInput 만 입력했을때 넘어가는 함수
+            //standard input into Assembly 
+            inputAssembly(str);
 
 
             printf("Here is argument only 1. Success!!\n");
@@ -79,13 +96,25 @@ int main(int argc, char* argv[])
         else if (argnumber == 2) {
 
             checkArg = 0;
-            number = 0;
             //standard input
-            printf("File name: ");
-            scanf("%s", str);
-            printf("\n");
-            strcpy(input, str);
-            //strcpy(str2, str);
+            while (1)
+            {
+
+                c = getchar();
+                if (c == 26 || c == -1)
+                {
+                    break;
+                }
+                input[i] = c;
+                i++;
+
+                if (c == 10)
+                {
+                    strcpy(input, "");
+                    i = 0;
+                }
+            }
+
             checkArg = checkFileValidation(input);
             //number = checkFilename(str2);
 
@@ -108,8 +137,8 @@ int main(int argc, char* argv[])
 
         for (int i = 0; i < argc - 1; i++)
         {
-          
-            strcpy(input, argv[i+1]);
+
+            strcpy(input, argv[i + 1]);
             if (checkSrec(input) == 1)
             {
                 srec = 1;
@@ -129,12 +158,12 @@ int main(int argc, char* argv[])
             {
                 printf("Error: Wrong Input");
             }
-           
+
         }
 
         if ((srec == 1) && (checkArg == 1))
         {
-         
+
             //s-record function
         }
         else if ((srec != 1) && (checkArg == 1) && (output == 1))
@@ -152,20 +181,19 @@ int main(int argc, char* argv[])
         // 
         // pipe all files 
     //}
-    
-    else 
+
+    else
     {
         printf("ERROR: argc wrong, check the command \n");
     }
 
-      
 
-   /* }
-    else {
-        printf("ERROR: What!! arv[0] is worng!! write incodeinput!!\n");
-    }
-   */
+
+    /* }
+     else {
+         printf("ERROR: What!! arv[0] is worng!! write incodeinput!!\n");
+     }
+    */
 
     return 0;
 }
-

@@ -13,4 +13,9 @@ void removeSwitch(char* str, char ch, char ch1);
 char* readString(char* text, char* createAssembly);
 int createFile(char* text, char* textName);
 
+
+
+int outputRecord(char* argv);
+char* readRecordData(char* str, char* createSREC);
+
 void help();

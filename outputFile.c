@@ -20,7 +20,7 @@ int outputRecord(char* argv) {
 	char arrayHex[] = { 0 };
 	char fileName[20];
 	strcpy(fileName, argv);
-	char* createAssembly = 0;
+	char* createSREC = 0;
 	char str[17] = { 0 };
 
 	fp = fopen(argv, "r");
@@ -41,7 +41,7 @@ int outputRecord(char* argv) {
 	while (fgets(str, sizeof(str), fp)) {
 
 
-		createAssembly = readString(str, createAssembly);
+		createSREC = readRecordData(str, createSREC);
 
 		
 
@@ -56,4 +56,37 @@ int outputRecord(char* argv) {
 	}
 
 	return 0;
+}
+
+
+char* readRecordData(char* str, char* createSREC) {
+
+	char readText[17] = { 0 };
+	int ascii = 0;
+	char storeArray[100] = { 0 };
+	char assembly[100] = { 0 };
+
+	// copy the string into readText
+	strcpy(readText, str);
+	int i = 0;
+	int j = 0;
+	for (i = 0; i < readText[i]; i++) {
+
+		//\0까지 읽네..?
+		// read one character and calculate
+		ascii = readText[i];
+
+		sprintf(storeArray, "$%X,", ascii);
+
+
+		createSREC = strcat(assembly, storeArray);
+
+		ascii = 0;
+
+	}
+
+
+	return createSREC;
+
+
 }
