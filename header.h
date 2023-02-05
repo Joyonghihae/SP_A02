@@ -4,13 +4,10 @@
 #pragma warning(disable: 4996)
 
 
+int checkFileValidation(char* str);
 
 
-int checkFilename(char* str);
-int checkInputArgument(char* str);
-
-int checkTwoCommand(char* argv);
-int checkOutputArgument(char* argv);
-
+void inputAssembly(char* argv);
+void removeSwitch(char* str, char ch, char ch1);
 
 void help();

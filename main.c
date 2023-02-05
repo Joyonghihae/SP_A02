@@ -22,10 +22,12 @@ int main(int argc, char* argv[])
     //if (strcmp(argv[0], "encodeInput") == 0) {
 
 
-    argc = 2;
+   /* argc = 2;
     argv[0] = "encodeInput";
-    argv[1] = "-h";
+    argv[1] = "-h";*/
 
+    argc = 1;
+    argv[0] = "encodeInput";
 
         if (argc == oneCmd) {
 
@@ -38,11 +40,14 @@ int main(int argc, char* argv[])
             printf("\n");
             strcpy(str1, str);
             strcpy(str2, str);
-            checkArg = checkInputArgument(str1);
-            number = checkFilename(str2);
-            if ((number == 1) && (checkArg == 1) ) {
+            checkArg = checkFileValidation(str1);
+            //number = checkFilename(str2);
+            if (checkArg == 4) {
 
                 // encodeInput 만 입력했을때 넘어가는 함수
+                //standard input into Assembly 
+                inputAssembly(str);
+
 
                 printf("Here is argument only 1. Success!!\n");
             }
@@ -57,10 +62,10 @@ int main(int argc, char* argv[])
         else if (argc == twoCmd) {
 
 
-            int argnumber = checkTwoCommand(argv[1]);
+            int argnumber = checkFileValidation(argv[1]);
 
 
-            if (argnumber == 1) {
+            if (argnumber == 3) {
 
                 printf("Here is argument -h. Success!!\n");
 
@@ -80,8 +85,11 @@ int main(int argc, char* argv[])
                 printf("\n");
                 strcpy(str1, str);
                 strcpy(str2, str);
-                checkArg = checkInputArgument(str1);
-                number = checkFilename(str2);
+                checkArg = checkFileValidation(str1);
+                //number = checkFilename(str2);
+
+                // checkArg에서 넘어오면 3으로 넘어올듯
+
                 printf("Here is argument only 2. Success!!\n");
                 // encodeInput -omyData.asm 이거만 입력했을때 넘어가는 함수
 
