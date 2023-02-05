@@ -18,7 +18,8 @@ int main(int argc, char* argv[])
    // char str2[20];
     int checkArg = 0;
     int number = 0;
-    int srec = -1;
+    int srec = 0;
+    int output = 0;
 
     //if (strcmp(argv[0], "encodeInput") == 0) {
 
@@ -114,7 +115,6 @@ int main(int argc, char* argv[])
             strcpy(input, argv[i+1]);
             if (checkSrec(input) == 1)
             {
-
                 srec = 1;
                 continue;
             }
@@ -123,18 +123,27 @@ int main(int argc, char* argv[])
                 checkArg = 1;
                 continue;
             }
+            else if (checkFileValidation(input) == 2)
+            {
+                output = 1;
+                continue;
+            }
+            else
+            {
+                printf("Error: Wrong Input");
+            }
            
         }
 
         if ((srec == 1) && (checkArg == 1))
         {
-            printf("Here is argument only 3. Success!!\n");
-            //go to read file function..
+         
+            //s-record function
         }
-
-   
-
-        //  
+        else if ((srec != 1) && (checkArg == 1) && (output == 1))
+        {
+            //assembly function
+        }
 
 
 
@@ -144,6 +153,40 @@ int main(int argc, char* argv[])
 
         //encodeInput -imyData.dat -omyData.srec -srec 이거 입력했을때
 
+        for (int i = 0; i < argc - 1; i++)
+        {
+
+            strcpy(input, argv[i + 1]);
+            if (checkSrec(input) == 1)
+            {
+                srec = 1;
+                continue;
+            }
+            else if (checkFileValidation(input) == 1)
+            {
+                checkArg = 1;
+                continue;
+            }
+            else if (checkFileValidation(input) == 2)
+            {
+                output = 1;
+                continue;
+            }
+            else
+            {
+                printf("Error: Wrong Input");
+            }
+
+        }
+
+        if ((srec == 1) && (checkArg == 1) && (output == 1))
+        {
+            printf("s-record");
+        }
+        else if ((srec != 1) && (checkArg == 1) && (output == 1))
+        {
+            printf("assembly");
+        }
 
 
         printf("Here is argument only 4. Success!!\n");
