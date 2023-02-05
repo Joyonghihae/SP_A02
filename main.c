@@ -33,20 +33,23 @@ int main(int argc, char* argv[])
 
             //standard input
             
-            printf("File name: ");
+           /* printf("File name: ");
 
 
             scanf("%s", str);
             printf("\n");
             strcpy(str1, str);
-            strcpy(str2, str);
+            strcpy(str2, str);*/
+
+            strcpy(str1, "myFile.txt");
+
             checkArg = checkFileValidation(str1);
             //number = checkFilename(str2);
             if (checkArg == 4) {
 
                 // encodeInput 만 입력했을때 넘어가는 함수
                 //standard input into Assembly 
-                inputAssembly(str);
+                inputAssembly(str1);
 
 
                 printf("Here is argument only 1. Success!!\n");
