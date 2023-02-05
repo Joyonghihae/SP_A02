@@ -17,7 +17,7 @@
 
 int checkFileValidation(char* str) {
 
-    int value = 0;
+    int value = -1;
     char checkcmd[20] = { 0 };
     //char arg[3] = "-i";
     char* cmdI = "-i";
@@ -33,8 +33,6 @@ int checkFileValidation(char* str) {
     if ((ptr == NULL)) {
 
         printf("ERROR: Not specified\n");
-
-        value = -1;
 
         return value;
     } else {
@@ -106,12 +104,6 @@ int checkFileValidation(char* str) {
       
     }
 
-    if (value == 0) {
-
-        value = -1;
-
-        return value;
-    }
 
     return value;
 }
@@ -140,5 +132,17 @@ void removeSwitch(char* str, char ch, char ch1) {
             break;
         }
 
+    }
+}
+
+int checkSrec(char* str)
+{
+    if (strcmp(str, "-srec") == 0)
+    {
+        return 1;
+    }
+    else
+    {
+        return -1;
     }
 }
