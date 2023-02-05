@@ -104,10 +104,7 @@ int main(int argc, char* argv[])
 
         return 0;
     }
-    else if (argc == threeCmd) {
-
-        //encodeInput –srec -imyData.dat 이거 입력했을때 
-       
+    else if (argc == threeCmd || argc == fourCmd) {
 
         for (int i = 0; i < argc - 1; i++)
         {
@@ -149,55 +146,19 @@ int main(int argc, char* argv[])
 
         return 0;
     }
-    else if (argc == fourCmd) {
-
-        //encodeInput -imyData.dat -omyData.srec -srec 이거 입력했을때
-
-        for (int i = 0; i < argc - 1; i++)
-        {
-
-            strcpy(input, argv[i + 1]);
-            if (checkSrec(input) == 1)
-            {
-                srec = 1;
-                continue;
-            }
-            else if (checkFileValidation(input) == 1)
-            {
-                checkArg = 1;
-                continue;
-            }
-            else if (checkFileValidation(input) == 2)
-            {
-                output = 1;
-                continue;
-            }
-            else
-            {
-                printf("Error: Wrong Input");
-            }
-
-        }
-
-        if ((srec == 1) && (checkArg == 1) && (output == 1))
-        {
-            printf("s-record");
-        }
-        else if ((srec != 1) && (checkArg == 1) && (output == 1))
-        {
-            printf("assembly");
-        }
-
-
-        printf("Here is argument only 4. Success!!\n");
-
-        return 0;
-    }
-    else {
+    //else if ()
+    //{
+        // ls -l | encodeInput -odirectory.srec -srec 
+        // 
+        // pipe all files 
+    //}
+    
+    else 
+    {
         printf("ERROR: argc wrong, check the command \n");
     }
 
-        // ls -l | encodeInput -odirectory.srec -srec 이건 몇개라고해야될까.. 
+      
 
    /* }
     else {
